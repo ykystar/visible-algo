@@ -1,8 +1,5 @@
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.RenderingHints;
+
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -37,9 +34,9 @@ public class AlgoFrame extends JFrame{
     public int getCanvasWidth(){return canvasWidth;}
     public int getCanvasHeight(){return canvasHeight;}
 
-    // TODO: 设置自己的数据
-    private Object data;
-    public void render(Object data){
+
+    private MonteCarloPiData data;
+    public void render(MonteCarloPiData data){
         this.data = data;
         repaint();
     }
@@ -65,7 +62,21 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            // TODO： 绘制自己的数据data
+            AlgoVisHelper.setStrokeWidth(g2d,3);
+            AlgoVisHelper.setColor(g2d,AlgoVisHelper.Blue);
+            Circle circle = data.getCircle();
+            AlgoVisHelper.strokeCircle(g2d,circle.getX(),circle.getY(),circle.getR());
+
+            for(int i=0; i< data.getPointsNumber();i++){
+                Point p = data.getPoint(i);
+                if(circle.contain(p))
+                    AlgoVisHelper.setColor(g2d,AlgoVisHelper.Red);
+                else
+                    AlgoVisHelper.setColor(g2d,AlgoVisHelper.Green);
+
+                AlgoVisHelper.fillCircle(g2d,p.x,p.y,3);
+            }
+
         }
 
         @Override
