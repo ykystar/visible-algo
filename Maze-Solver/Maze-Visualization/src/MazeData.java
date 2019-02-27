@@ -72,4 +72,27 @@ public class MazeData {
     public int M(){return M;}
     public int getEntranceX(){return entranceX;}
     public int getEntranceY(){return entranceY;}
+
+    public int getExitX(){return exitX;}
+    public int getExitY(){return exitY;}
+
+    public char getMaze(int i,int j){
+        if(!inArea(i,j))
+            throw new IllegalArgumentException("i or j is out of index in getMaze!");
+        return maze[i][j];
+    }
+
+    public boolean inArea(int x,int y){
+        return x >=0 && x<N && y>=0 && y<M;
+    }
+
+    public void print(){
+        System.out.println(N + " " + M);
+        for(int i=0; i<N;i++){
+            for(int j=0;j<M;j++)
+                System.out.print(maze[i][j]);
+            System.out.println();
+        }
+        return;
+    }
 }
