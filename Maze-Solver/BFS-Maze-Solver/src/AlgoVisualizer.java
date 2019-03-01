@@ -43,33 +43,42 @@ public class AlgoVisualizer {
         queue.addLast(entrance);
         data.visited[entrance.getX()][entrance.getY()]=true;
 
-        boolean isSoled = false;
+        boolean isSolved = false;
 
         while(queue.size()!=0){
+            Position curPos = queue.pop();
+            setData(curPos.getX(),curPos.getY(),true);
+
+            if(curPos.getX() == data.getExitX() && curPos.getY() == data.getExitY()){
+                isSolved = true;
+                findPath(curPos);
+                break;
+            }
+
+            for(int i=0 ; i<4; i++){
+                int newX = curPos.getX() + d[i][0];
+                int newY = curPos.getY() + d[i][1];
+
+                if(data.inArea(newX,newY) && !data.visited[newX][newY] && data.getMaze(newX,newY) == MazeData.ROAD){
+                    queue.addLast(new Position(newX,newY,curPos));
+                    data.visited[newX][newY] = true;
+                }
+            }
+
         }
+
+        if(!isSolved)
+            System.out.println("the maze has no Solution");
+        setData(-1,-1,false);
     }
 
-    private boolean go(int x,int y){
-        if(!data.inArea(x,y))
-            throw new IllegalArgumentException("x,y are out of index in go function!");
+    private void findPath(Position des){
 
-        data.visited[x][y] =true;
-        setData(x,y,true);
-
-        if(x == data.getExitX() && y == data.getExitY())
-            return true;
-
-        for(int i=0;i<4;i++){
-            int newX = x + d[i][0];
-            int newY = y + d[i][1];
-
-            if(data.inArea(newX,newY) && data.getMaze(newX,newY) == MazeData.ROAD && !data.visited[newX][newY])
-                if(go(newX,newY))
-                    return true;
+        Position cur = des;
+        while(cur !=null){
+            data.result[cur.getX()][cur.getY()]= true;
+            cur = cur.getPrev();
         }
-
-        setData(x,y,false);
-        return false;
     }
 
     private void setData(int x,int y,boolean isPath){
