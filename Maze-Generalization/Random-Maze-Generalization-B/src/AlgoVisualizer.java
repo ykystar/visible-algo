@@ -73,7 +73,7 @@ public class AlgoVisualizer {
         AlgoVisHelper.pause(DELAY);
     }
 
-    private boolean go(int x,int y){
+    private boolean  go(int x,int y){
 
         if(!data.inArea(x,y))
             throw new IllegalArgumentException("x,y are out of index");
