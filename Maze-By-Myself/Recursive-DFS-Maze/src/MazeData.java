@@ -11,9 +11,9 @@ public class MazeData {
     private int exitX;
     private int exitY;
 
-    private char[][] maze;
-    private boolean[][] visited;
-    private boolean[][] path;
+    public char[][] maze;
+    public boolean[][] visited;
+    public boolean[][] path;
 
     public MazeData(int N,int M){
         this.N = N;
@@ -46,8 +46,8 @@ public class MazeData {
 
     public int N(){return N;}
     public int M(){return M;}
-    public int getEntranceX(){return exitX;}
-    public int getEntranceY(){return exitY;}
+    public int getEntranceX(){return getEntranceX;}
+    public int getEntranceY(){return getEntranceY;}
 
     public boolean inArea(int x,int y){
         return x>=0 && x<N && y>=0 && y<M;

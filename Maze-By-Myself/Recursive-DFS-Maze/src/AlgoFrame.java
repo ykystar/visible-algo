@@ -38,8 +38,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // TODO: 设置自己的数据
-    private Object data;
-    public void render(Object data){
+    private MazeData data;
+    public void render(MazeData data){
         this.data = data;
         repaint();
     }
@@ -65,7 +65,20 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            // TODO： 绘制自己的数据data
+
+            int w = canvasWidth / data.M();
+            int h = canvasHeight / data.N();
+
+            for(int i =0; i<data.N();i++)
+                for(int j=0;j<data.M();j++){
+                    if(data.maze[i][j]==MazeData.WALL)
+                        AlgoVisHelper.setColor(g2d,AlgoVisHelper.LightBlue);
+                    else
+                        AlgoVisHelper.setColor(g2d,AlgoVisHelper.White);
+
+                    AlgoVisHelper.fillRectangle(g2d,j*w,h*i,w,h);
+                }
+
         }
 
         @Override
