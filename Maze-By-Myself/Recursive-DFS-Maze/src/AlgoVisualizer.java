@@ -6,9 +6,11 @@ import java.awt.event.MouseEvent;
 
 public class AlgoVisualizer {
 
-    // TODO: 创建自己的数据
-    private Object data;        // 数据
+
+    private MazeData data;        // 数据
     private AlgoFrame frame;    // 视图
+    private int[][] d = {{0,-1},{0,1},{1,0},{-1,0}};
+    
 
     public AlgoVisualizer(int sceneWidth, int sceneHeight){
 
