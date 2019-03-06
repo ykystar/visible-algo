@@ -3,6 +3,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
 
 public class AlgoVisualizer {
 
@@ -38,37 +39,45 @@ public class AlgoVisualizer {
 
         setData(-1,-1);
 
-        go(data.getEntranceX(),data.getEntranceY()+1);
+        bfs(data.getEntranceX(),data.getEntranceY()+1);
 
         setData(-1,-1);
 
     }
 
-    private void go(int x,int y){
-        if(!data.inArea(x,y))
-            throw new IllegalArgumentException("adddddd");
+    private void bfs(int x,int y){
+        LinkedList<Position>  queue= new LinkedList<>();
+        Position firstPoint = new Position(x,y);
 
-        data.visited[x][y] = true;
-        for(int i =0;i<4;i++){
-            int newX = x + d[i][0]*2;
-            int newY = y + d[i][1]*2;
+        queue.addLast(firstPoint);
+        data.visited[x][y]=true;
+
+        while (queue.size()!=0){
+            Position p  = queue.pop();
 
 
-            if(data.inArea(newX,newY) && !data.visited[newX][newY]){
-                setData(x+d[i][0],y+d[i][1]);
-                go(newX,newY);
+            for(int i=0;i<4;i++){
+                int newX = p.getX() + d[i][0] *2;
+                int newY = p.getY() + d[i][1] *2;
+
+                if(data.inArea(newX,newY)&&data.maze[newX][newY]==MazeData.ROAD && !data.visited[newX][newY]){
+                    data.visited[newX][newY]=true;
+                    queue.addLast(new Position(newX,newY));
+                    setData(p.getX()+d[i][0],p.getY()+d[i][1]);
+                }
 
             }
         }
+
     }
 
     private void setData(int x,int y){
+
         if(data.inArea(x,y))
-            data.maze[x][y] = MazeData.ROAD;
+            data.maze[x][y]=MazeData.ROAD;
 
         frame.render(data);
         AlgoVisHelper.pause(DELAY);
-
     }
 
 
