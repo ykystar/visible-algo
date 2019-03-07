@@ -24,7 +24,7 @@ public class AlgoVisualizer {
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
-            frame = new AlgoFrame("DFS-Maze-Generalization", sceneWidth, sceneHeight);
+            frame = new AlgoFrame("Recursive-DFS-Maze-Generalization", sceneWidth, sceneHeight);
 
             new Thread(() -> {
                 run();
