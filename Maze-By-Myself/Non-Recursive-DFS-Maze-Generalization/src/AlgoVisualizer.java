@@ -13,7 +13,7 @@ public class AlgoVisualizer {
     private AlgoFrame frame;    // 视图
     private int[][] d = {{0,-1},{0,1},{1,0},{-1,0}};
 
-    private final int DELAY = 1000;
+    private final int DELAY = 5;
     private final int BLOCK = 5;
 
 
