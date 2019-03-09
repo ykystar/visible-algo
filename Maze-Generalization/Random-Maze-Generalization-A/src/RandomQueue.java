@@ -28,6 +28,6 @@ public class RandomQueue<E> {
     }
 
     public boolean empty(){
-        return size() == 0;
+        return queue.size() == 0;
     }
 }
