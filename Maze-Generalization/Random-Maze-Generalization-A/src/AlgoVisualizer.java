@@ -51,10 +51,11 @@ public class AlgoVisualizer {
                 int newY = curPos.getY() + d[i][1]*2;
 
                 if(data.inArea(newX,newY) && !data.visited[newX][newY]&& data.maze[newX][newY] == MazeData.ROAD){
-                    queue.add(new Position(newX,newY));
+
                     data.visited[newX][newY]=true;
                     data.openMist(newX,newY);
                     setData(curPos.getX() + d[i][0],curPos.getY() +d[i][1]);
+                    queue.add(new Position(newX,newY));
                 }
             }
         }

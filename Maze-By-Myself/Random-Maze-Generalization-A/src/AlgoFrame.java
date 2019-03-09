@@ -64,19 +64,21 @@ public class AlgoFrame extends JFrame{
             hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g2d.addRenderingHints(hints);
 
-            int w = canvasWidth/data.M();
-            int h = canvasHeight/data.N();
+            // 具体绘制
 
-            for(int i=0;i<data.N();i++)
-                for(int j=0;i<data.M();j++){
-                    if(data.inMist[i][j])
-                        AlgoVisHelper.setColor(g2d,AlgoVisHelper.LightGreen);
-                    else if(data.maze[i][j] == MazeData.WALL)
+            int w = canvasWidth / data.M();
+            int h = canvasHeight / data.N();
+
+            for(int i =0; i<data.N();i++)
+                for(int j=0;j<data.M();j++){
+                    if(data.maze[i][j]==MazeData.WALL)
                         AlgoVisHelper.setColor(g2d,AlgoVisHelper.LightBlue);
                     else
                         AlgoVisHelper.setColor(g2d,AlgoVisHelper.White);
-                    AlgoVisHelper.fillRectangle(g2d,w*j,h*i,w,h);
+
+                    AlgoVisHelper.fillRectangle(g2d,j*w,h*i,w,h);
                 }
+
         }
 
         @Override

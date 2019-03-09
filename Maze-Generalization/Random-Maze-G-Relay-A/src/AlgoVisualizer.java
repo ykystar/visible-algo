@@ -62,6 +62,7 @@ public class AlgoVisualizer {
     private void setData(int x,int y){
         if(data.inArea(x,y))
             data.maze[x][y]=MazeData.ROAD;
+
         frame.render(data);
         AlgoVisHelper.pause(DELAY);
     }
